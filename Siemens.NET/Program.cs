@@ -24,7 +24,7 @@ namespace Siemens.NET
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=ConexaoPLC}/{action=Index}/{id?}");
 
             app.Run();
         }

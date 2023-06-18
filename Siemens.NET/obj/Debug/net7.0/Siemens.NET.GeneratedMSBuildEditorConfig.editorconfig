@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Fabio/Documents/GitHub/Siemens.NET/Siemens.NET/Views/ConexaoPLC/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZXhhb1BMQ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Fabio/Documents/GitHub/Siemens.NET/Siemens.NET/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
