@@ -5,6 +5,7 @@ using Siemens.NET.Models;
 
 namespace Siemens.NET.Controllers
 {
+    
     public class ConexaoPLCController : Controller
     {
         public IActionResult Index()
@@ -23,14 +24,43 @@ namespace Siemens.NET.Controllers
         public IActionResult Conectar(ConexaoPLCModel conexaoModel)
         {
             Plc plc = new Plc(conexaoModel.TipoCPU, conexaoModel.Ip, conexaoModel.Rack, conexaoModel.Slot);
-            plc.Open();
-            return View(conexaoModel);
+
+            try
+            {
+                plc.Open();
+                if (plc.IsConnected)
+                {
+                    ViewBag.StatusConexao = "Conectado";
+                }
+            }
+            catch (PlcException ex)
+            {
+                ViewBag.StatusConexao = $"{ex}";
+            }
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Desconectar(ConexaoPLCModel conexaoModel)
+        {
+            Plc plc = new Plc(conexaoModel.TipoCPU, conexaoModel.Ip, conexaoModel.Rack, conexaoModel.Slot);
+
+            plc.Close();
+
+            if (!plc.IsConnected)
+            {
+                ViewBag.StatusConexao = "Desconectado";
+            }
+
+            return View("Index");
         }
 
 
         // ---------------------------------------------------------------
         // Métodos Auxiliares
         // ---------------------------------------------------------------
+
 
     }
 }

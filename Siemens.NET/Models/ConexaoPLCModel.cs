@@ -8,7 +8,7 @@ namespace Siemens.NET.Models
         public string Ip { get; set; }
         public Int16 Rack { get; set; }
         public Int16 Slot { get; set; }
-
+        public PlcException plcException { get; set; }
 
     }
 }
