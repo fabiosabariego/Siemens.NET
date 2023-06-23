@@ -18,7 +18,7 @@ html {
 }
 
 body {
-    background: rgba(107,107,250, 0.40);
+    background: #00cccc65;
     margin-bottom: 60px;
     font: normal 16pt Monaco;
 }
@@ -35,16 +35,28 @@ body {
     position: relative;
 }
 
-#cnx_btn {
-    margin: 20px 0px 4px 0px;
+.cnx_btn {
+    margin: 20px 5px 4px 0px;
     width: 140px;
     align-content: center;
+    font-weight: bolder;
+    font: normal 14pt Monaco;
 }
 
-#desc_btn {
-    margin: 20px 0px 4px 0px;
+.cnx_btn:hover {
+    transform: scale(1.05, 1.05);
+}
+
+.desc_btn {
+    margin: 20px 5px 4px 5px;
     width: 140px;
     align-content: center;
+    font-weight: bolder;
+    font: normal 14pt Monaco;
+}
+
+.desc_btn:hover {
+    transform: scale(1.05, 1.05);
 }
 
 #label{

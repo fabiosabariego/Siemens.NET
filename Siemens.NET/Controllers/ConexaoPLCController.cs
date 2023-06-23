@@ -35,7 +35,11 @@ namespace Siemens.NET.Controllers
             }
             catch (PlcException ex)
             {
-                ViewBag.StatusConexao = $"{ex}";
+                if (ex != null)
+                {
+                    ViewBag.StatusConexao = $"Dados Incorretos ou PLC fora da rede!";
+                }
+
             }
 
             return View("Index");
@@ -60,7 +64,7 @@ namespace Siemens.NET.Controllers
         // ---------------------------------------------------------------
         // Métodos Auxiliares
         // ---------------------------------------------------------------
-
+        
 
     }
 }
