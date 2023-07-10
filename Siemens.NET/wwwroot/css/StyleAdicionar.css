@@ -1,0 +1,35 @@
+﻿.minhaDiv {
+    background-color: lightgray;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 5px 1px rgb(0, 0, 0, 0.5);
+    width: 20%;
+}
+
+.txtPrincipal {
+    font: bold 20pt Monaco;
+    text-align: center;
+    margin: 0% 0% 8% 0%;
+}
+
+.elementos {
+    font: normal 12pt Arial;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2% 4% 2% 4%;
+}
+
+.txt {
+    font: bold 16pt Monaco;
+    text-align: center;
+    margin: 6% 0% 0% 0%;
+}
+
+.btbExec{
+    font: normal 12pt Arial;
+    margin: 8% 0% 3% 0%;
+    padding: 3% 10% 3% 10%;
+}

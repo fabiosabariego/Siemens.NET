@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Bo6X77rdxhlCNF/ugOjtkGdLvfFEGurHjP0blKmNR2w=",
+  "Hash": "5YZCLAJmDQSlKK9FNIMGGlw/IIs+5sMmZCd3kuCpPNs=",
   "Source": "Siemens.NET",
   "BasePath": "_content/Siemens.NET",
   "Mode": "Default",
@@ -68,6 +68,40 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\css\\StyleAdicionar.css",
+      "SourceId": "Siemens.NET",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\",
+      "BasePath": "_content/Siemens.NET",
+      "RelativePath": "css/StyleAdicionar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StyleAdicionar.css"
+    },
+    {
+      "Identity": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\css\\styleConnect.css",
+      "SourceId": "Siemens.NET",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\",
+      "BasePath": "_content/Siemens.NET",
+      "RelativePath": "css/styleConnect.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\styleConnect.css"
+    },
+    {
       "Identity": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\favicon.ico",
       "SourceId": "Siemens.NET",
       "SourceType": "Discovered",
@@ -83,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\ReadWrite.js",
+      "SourceId": "Siemens.NET",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\",
+      "BasePath": "_content/Siemens.NET",
+      "RelativePath": "js/ReadWrite.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\ReadWrite.js"
     },
     {
       "Identity": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\site.js",

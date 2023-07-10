@@ -1,6 +1,10 @@
 ﻿@using S7.Net;
 @model ConexaoPLCModel
 
+<head>
+    <link rel="stylesheet" href="~/css/styleConnect.css" asp-append-version="true" />
+</head>
+
 <div class="container" id="container">
 
         <h1>Conexão com PLC</h1>
@@ -39,7 +43,5 @@
             <button class="btn btn-danger desc_btn" asp-controller="ConexaoPLC" asp-action="Desconectar">Desconectar</button>
 
         </form>
-
-
 
 </div>

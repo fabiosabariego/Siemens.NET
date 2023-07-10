@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\Siemens.NET.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\css\\StyleAdicionar.css",
+      "PackagePath": "staticwebassets\\css\\StyleAdicionar.css"
+    },
+    {
       "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\css\\styleConnect.css",
+      "PackagePath": "staticwebassets\\css\\styleConnect.css"
+    },
+    {
       "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\ReadWrite.js",
+      "PackagePath": "staticwebassets\\js\\ReadWrite.js"
     },
     {
       "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\site.js",
