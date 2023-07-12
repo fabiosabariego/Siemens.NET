@@ -12,6 +12,7 @@ namespace Siemens.NET.Models
         public int StartByte { get; set; }
         public int Count { get; set; }
         public byte[] Value { get; set; }
+        public int ReadOrWrite { get; set; }
 
     }
 }
