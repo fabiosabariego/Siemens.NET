@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ofxTKts7uGqFKe1a4g/c2q0BmEjD8PaViZ+LoilC5ximfw9Lk+MMDkjMw22tLoPM78IB4/Fw8mHhLBqK7oXLDQ==",
+  "dgSpecHash": "emArCCoN7ICZOhxQdqJtgJE25ACV1who0D6q8e3lyQznb3tQFF7dKFa9BGh3pdsoSKAs/TDQxWW6HxOWu+NJhg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\Siemens.NET.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fabio\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\Fabio\\.nuget\\packages\\jquery\\3.7.0\\jquery.3.7.0.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",
