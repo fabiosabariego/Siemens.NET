@@ -42,14 +42,14 @@
 
 
         // Cria o campo input
-        var input = $('<input type="text" name="inputDiv' + DivCount + '">');
+        var endereco = $('<input type="text" name="endereceoDiv' + DivCount + '">');
 
         // Cria o botão de envio
         var btnEnviar = $('<button class="btnEnviarDiv" data-divindex="' + DivCount + '">Enviar</button>');
 
         // Adiciona os campos à div
         //novaDiv.append(select);
-        novaDiv.append(input);
+        novaDiv.append(endereco);
         novaDiv.append(btnEnviar);
 
         // Adiciona a div ao container
@@ -61,29 +61,53 @@
         var divIndex = $(this).data('divindex');
 
         // Recupera os valores dos campos da div específica
-        var valorSelect = $('input[name=SelAcao_' + divIndex + ']:checked').val();
-        var valorInput = $('input[name="inputDiv' + divIndex + '"]').val();
+        var valAcao = $('input[name=SelAcao_' + divIndex + ']:checked').val();
+        var valEndereco = $('input[name="endereceoDiv' + divIndex + '"]').val();
 
         // Cria o objeto com os dados da div
         var dadosDiv = {
-            ValorSelect: valorSelect,
-            ValorInput: valorInput
+            ValorSelect: valAcao,
+            ValorInput: valEndereco
         };
 
-        // Envia os dados para o backend usando uma requisição AJAX
-        $.ajax({
-            url: '/ReadWrite/Action', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
-            type: 'POST',
-            data: dadosDiv,
-            dataType: 'json',
-            success: function (response) {
-                // Lida com a resposta do backend
-                console.log(response);
-            },
-            error: function (error) {
-                // Lida com erros de requisição
-                console.log(error);
-            }
-        });
+
+        if (valAcao == 'escrita') {
+
+            // Envia os dados para o backend usando uma requisição AJAX
+            $.ajax({
+                url: '/ReadWrite/WritePLC', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
+                type: 'POST',
+                data: dadosDiv,
+                dataType: 'json',
+                success: function (response) {
+                    // Lida com a resposta do backend
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Lida com erros de requisição
+                    console.log(error);
+                }
+            });
+
+        } else {
+
+            // Recebe os dados para o backend usando uma requisição AJAX
+            $.ajax({
+                url: '/ReadWrite/ReadPLC', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
+                type: 'GET',
+                data: dadosDiv,
+                dataType: 'json',
+                success: function (response) {
+                    // Lida com a resposta do backend
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Lida com erros de requisição
+                    console.log(error);
+                }
+            });
+
+        }
+        
     });
 });

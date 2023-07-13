@@ -11,7 +11,14 @@ namespace Siemens.NET.Controllers
         }
 
         [HttpPost]
-        public ActionResult Action(ReadWriteModel dados)
+        public ActionResult WritePLC(ReadWriteModel dados)
+        {
+
+            return Json(new { success = true, message = "Dados recebidos com sucesso!" });
+        }
+
+        [HttpGet]
+        public ActionResult ReadPLC(ReadWriteModel dados)
         {
 
             return Json(new { success = true, message = "Dados recebidos com sucesso!" });
