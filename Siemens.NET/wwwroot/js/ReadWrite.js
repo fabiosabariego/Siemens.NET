@@ -1,122 +1,89 @@
-﻿/*
-function adicionarDiv() {
-    // Criando nova DIV
-    var novaDiv = document.createElement('div');
+﻿$(document).ready(function () {
+    var DivCount = 0;
 
-    //Adicionamdno classes ou atributos à DIV
-    novaDiv.className = 'minhaDiv'
+    $('#btnAdicionarDiv').click(function () {
+        DivCount++;
 
-    // Criar elementos filhos e adicioná-los à DIV
-    var texto = document.createElement('p');
-    texto.textContent = 'Elemento PLC';
-    texto.className = 'txtPrincipal';
-    novaDiv.appendChild(texto);
+        // Cria a div dinamicamente
+        var novaDiv = $('<div class="minhaDiv">');
 
-    //Criando DropDownList para definir o que será feito no PLC
-    var select = document.createElement('select');
-    var opt1 = new Option('Selecione Ação', 'acao');
-    select.appendChild(opt1);
-    var opt2 = new Option('Escrita', 'Escrita');
-    select.appendChild(opt2);
-    var opt3 = new Option('Leitura', 'Leitura');
-    select.className = 'elementos';
-    select.appendChild(opt3);
-    novaDiv.appendChild(select);
-
-    //Criando um campo de Input para Endereços
-    var endereco = document.createElement('input');
-    var enderecoTexto = document.createElement('label');
-    enderecoTexto.textContent = "Area PLC";
-    endereco.type = "text";
-    enderecoTexto.className = 'txt';
-    endereco.className = 'elementos';
-    novaDiv.appendChild(enderecoTexto);
-    novaDiv.appendChild(endereco);
+        // Adicionar o campo de radiobutton
+        var SelLeitura = $('<input>').attr({
+            type: 'radio',
+            name: 'SelAcao_' + DivCount,
+            value: 'leitura',
+            class: 'RadioBtnAcao'
+        });
+        var SelEscrita = $('<input>').attr({
+            type: 'radio',
+            name: 'SelAcao_' + DivCount,
+            value: 'escrita',
+            class: 'RadioBtnAcao'
+        });
+        novaDiv.append(SelLeitura).append('Leitura');
+        novaDiv.append(SelEscrita).append('Escrita');
 
 
-    //Criando um campo de Input para Valores
-    var valor = document.createElement('input');
-    var valorLabel = document.createElement('label');
-    valorLabel.textContent = "Valor PLC";
-    valor.type = "text";
-    valorLabel.className = 'txt';
-    valor.className = 'elementos';
-    novaDiv.appendChild(valorLabel);
-    novaDiv.appendChild(valor);
-
-    //Criando um Botão para enviar os dados para PLC
-    var btnSubmit = document.createElement('button');
-    btnSubmit.textContent = "Executar";
-    btnSubmit.className = 'btbExec';
-    novaDiv.appendChild(btnSubmit);
 
 
-    // Adicionar a DIV à div existente no documento
-    var divExistente = document.getElementById('divDinamica');
-    divExistente.appendChild(novaDiv);
-}
 
-*/
-
-function adicionarDiv() {
-    // Criando nova DIV
-    var novaDiv = document.createElement('div');
-
-    //Adicionamdno classes ou atributos à DIV
-    novaDiv.className = 'minhaDiv'
-
-    // Criar elementos filhos e adicioná-los à DIV
-    var texto = document.createElement('p');
-    texto.textContent = 'Elemento PLC';
-    texto.className = 'txtPrincipal';
-    novaDiv.appendChild(texto);
-
-    //Criando DropDownList para definir o que será feito no PLC
-    var selecReadWrite = document.createElement('select');
-    var opt1 = new Option('Selecione Ação', 'acao');
-    selecReadWrite.appendChild(opt1);
-    var opt2 = new Option('Escrita', 'Escrita');
-    selecReadWrite.appendChild(opt2);
-    var opt3 = new Option('Leitura', 'Leitura');
-    selecReadWrite.className = 'elementos';
-    selecReadWrite.appendChild(opt3);
-    novaDiv.appendChild(selecReadWrite);
-
-    //Criando um campo de Input para Endereços
-    var endereco = document.createElement('input');
-    var enderecoTexto = document.createElement('label');
-    enderecoTexto.textContent = "Area PLC";
-    endereco.type = "text";
-    enderecoTexto.className = 'txt';
-    endereco.className = 'elementos';
-    novaDiv.appendChild(enderecoTexto);
-    novaDiv.appendChild(endereco);
+        /*
 
 
-    //Criando um campo de Input para Valores
-    var valor = document.createElement('input');
-    var valorLabel = document.createElement('label');
-    valorLabel.textContent = "Valor PLC";
-    valor.type = "text";
-    valorLabel.className = 'txt';
-    valor.className = 'elementos';
-    novaDiv.appendChild(valorLabel);
-    novaDiv.appendChild(valor);
+        // Cria o campo select
+        var select = $('<select name="selectDiv' + DivCount + '">');
+        // Adicione as opções desejadas ao select
+        select.append($('<option value="opcao1">Opção 1</option>'));
+        select.append($('<option value="opcao2">Opção 2</option>'));
 
-    //Criando um Botão para enviar os dados para PLC
-    var btnSubmit = document.createElement('button');
-    btnSubmit.textContent = "Executar";
-    btnSubmit.click = executarDados;
-    btnSubmit.className = 'btbExec';
-    novaDiv.appendChild(btnSubmit);
+        */
 
 
-    // Adicionar a DIV à div existente no documento
-    var divExistente = document.getElementById('divDinamica');
-    divExistente.appendChild(novaDiv);
-}
 
-// Enviando Dados para o Back End, usando JQuery
-function executarDados() {
-    var selAcao = select.
-}
+
+        // Cria o campo input
+        var input = $('<input type="text" name="inputDiv' + DivCount + '">');
+
+        // Cria o botão de envio
+        var btnEnviar = $('<button class="btnEnviarDiv" data-divindex="' + DivCount + '">Enviar</button>');
+
+        // Adiciona os campos à div
+        //novaDiv.append(select);
+        novaDiv.append(input);
+        novaDiv.append(btnEnviar);
+
+        // Adiciona a div ao container
+        $('#divContainer').append(novaDiv);
+    });
+
+    // Manipula o evento de clique no botão de envio
+    $(document).on('click', '.btnEnviarDiv', function () {
+        var divIndex = $(this).data('divindex');
+
+        // Recupera os valores dos campos da div específica
+        var valorSelect = $('input[name=SelAcao_' + divIndex + ']:checked').val();
+        var valorInput = $('input[name="inputDiv' + divIndex + '"]').val();
+
+        // Cria o objeto com os dados da div
+        var dadosDiv = {
+            ValorSelect: valorSelect,
+            ValorInput: valorInput
+        };
+
+        // Envia os dados para o backend usando uma requisição AJAX
+        $.ajax({
+            url: '/ReadWrite/Action', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
+            type: 'POST',
+            data: dadosDiv,
+            dataType: 'json',
+            success: function (response) {
+                // Lida com a resposta do backend
+                console.log(response);
+            },
+            error: function (error) {
+                // Lida com erros de requisição
+                console.log(error);
+            }
+        });
+    });
+});
