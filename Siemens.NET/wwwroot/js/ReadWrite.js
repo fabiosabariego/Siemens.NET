@@ -66,7 +66,7 @@
 
         // Cria o objeto com os dados da div
         var dadosDiv = {
-            ValorSelect: valAcao,
+            //ValorSelect: valAcao,
             ValorInput: valEndereco
         };
 

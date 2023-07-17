@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using S7.Net;
 using Siemens.NET.Models;
 
 namespace Siemens.NET.Controllers
@@ -13,6 +14,7 @@ namespace Siemens.NET.Controllers
         [HttpPost]
         public ActionResult WritePLC(ReadWriteModel dados)
         {
+            
 
             return Json(new { success = true, message = "Dados recebidos com sucesso!" });
         }

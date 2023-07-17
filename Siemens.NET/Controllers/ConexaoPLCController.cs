@@ -30,6 +30,7 @@ namespace Siemens.NET.Controllers
                 plc.Open();
                 if (plc.IsConnected)
                 {
+                    //plc.Write("DB10.DBW0", "32.47");
                     ViewBag.StatusConexao = "Conectado";
                 }
             }
@@ -41,6 +42,13 @@ namespace Siemens.NET.Controllers
                 }
 
             }
+
+            var res1 = plc.Read("DB1.DBW0");
+            ushort res2 = (ushort)plc.Read("DB1.DBW2");
+            float valRes2 = res2 / 100f;
+
+            plc.Write("DB1.DBW0", (UInt16)52);
+            plc.Write("DB1.DBD6", (float)19.33f);
 
             return View("Index");
         }

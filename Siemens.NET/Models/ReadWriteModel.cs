@@ -5,17 +5,13 @@ namespace Siemens.NET.Models
 {
     public class ReadWriteModel
     {
-        /*
+
         // Leitura e Escrita de Bytes
         public DataType DataType { get; set; }
-        public int Db { get; set; }
+        public int endereco { get; set; }
         public int StartByte { get; set; }
         public int Count { get; set; }
         public byte[] Value { get; set; }
-        public int ReadOrWrite { get; set; }
-        */
 
-        public string ValorSelect { get; set; }
-        public string ValorInput { get; set; }
     }
 }
