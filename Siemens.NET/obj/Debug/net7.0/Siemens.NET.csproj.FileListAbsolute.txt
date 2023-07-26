@@ -69,3 +69,9 @@ C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\obj\Debug\net7.0\refint\
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\obj\Debug\net7.0\Siemens.NET.pdb
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\obj\Debug\net7.0\Siemens.NET.genruntimeconfig.cache
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\obj\Debug\net7.0\ref\Siemens.NET.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\libman.json

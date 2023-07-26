@@ -9,6 +9,11 @@ namespace Siemens.NET
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            //--------------------------------------------------------------------
+            // Configuração para manter a conexão com o PLC Ativa
+            //builder.Services.AddSignalR();
+            //--------------------------------------------------------------------
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

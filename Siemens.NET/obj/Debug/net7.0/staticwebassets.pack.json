@@ -25,6 +25,14 @@
       "PackagePath": "staticwebassets\\js\\ReadWrite.js"
     },
     {
+      "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\signalr.js",
+      "PackagePath": "staticwebassets\\js\\signalr.js"
+    },
+    {
+      "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\signalr.min.js",
+      "PackagePath": "staticwebassets\\js\\signalr.min.js"
+    },
+    {
       "Id": "C:\\Users\\Fabio\\Documents\\GitHub\\Siemens.NET\\Siemens.NET\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

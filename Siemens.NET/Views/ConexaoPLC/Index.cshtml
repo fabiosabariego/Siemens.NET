@@ -13,7 +13,7 @@
             <div class="form-group" id="tipocpu">
                 <label class="control-label" id="label">Tipo de CPU</label>
                 <select id="sel" class="form-select col-5" aria-label="Default select example"
-                    asp-for="TipoCPU" asp-items="Html.GetEnumSelectList<CpuType>()" required>
+                        asp-for="TipoCPU" asp-items="Html.GetEnumSelectList<CpuType>()" required>
                     <option value="0" disabled selected>Selecione o CLP</option>
                 </select>
                 <span asp-validation-for="TipoCPU" class="text-danger"></span>
@@ -21,12 +21,12 @@
 
             <div class="form-group">
                 <label class="control-label" id="label">IP</label>
-                <input class="form-control col-5" name="Ip" type="text" asp-for="Ip" required />
+                <input class="form-control col-5" id="enderecoIp" name="Ip" type="text" asp-for="Ip" required />
             </div>
 
             <div class="form-group">
                 <label class="control-label" id="label">Rack</label>
-                <input class="form-control col-5" name="Rack" type="number" asp-for="Rack" required/>
+                <input class="form-control col-5" name="Rack" type="number" asp-for="Rack" required />
             </div>
 
             <div class="form-group">
@@ -39,9 +39,10 @@
                 <div class="conectado">@ViewBag.StatusConexao</div>
             }
 
-            <button type="submit" class="btn btn-primary cnx_btn">Conectar</button>
+            <button type="submit" class="btn btn-primary cnx_btn" id="conectarPlc">Conectar</button>
             <button class="btn btn-danger desc_btn" asp-controller="ConexaoPLC" asp-action="Desconectar">Desconectar</button>
 
         </form>
+
 
 </div>
