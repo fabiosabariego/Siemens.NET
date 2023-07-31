@@ -8,6 +8,10 @@ namespace Siemens.NET
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
 
             //--------------------------------------------------------------------
             // Configuração para manter a conexão com o PLC Ativa
@@ -22,6 +26,8 @@ namespace Siemens.NET
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

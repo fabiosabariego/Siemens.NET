@@ -6,8 +6,24 @@
 
         // Cria a div dinamicamente
         var novaDiv = $('<div class="minhaDiv">');
+        var leEscreveDiv = $('<div class="leEscreveDiv">');
+        var enderecoDiv = $('<div class="enderecoDiv">');
+        var valorPlcDiv = $('<div class"valorPlcDiv">');
 
-        // Adicionar o campo de radiobutton
+        //***********************************************************************
+        // Recebe dados vindo da Seleção do tipo de dados do HTML
+        var tipoDadosHtml = document.getElementById('selTipoDados').value;
+        var tipoDados = $('<input type="text" name="tipoDados' + DivCount + '">');
+        //***********************************************************************
+
+        //***********************************************************************
+        // Carrega texto para o Popup
+        var txtPopup = document.createElement("p").textContent = 'Dados Tipo - ' + tipoDadosHtml;
+        novaDiv.append(txtPopup);
+        //***********************************************************************
+
+        //***********************************************************************
+        // Adicionar o campo de Seleção de Leitura ou Escrita para o PLC
         var SelLeitura = $('<input>').attr({
             type: 'radio',
             name: 'SelAcao_' + DivCount,
@@ -20,37 +36,71 @@
             value: 'escrita',
             class: 'RadioBtnAcao'
         });
-        novaDiv.append(SelLeitura).append('Leitura');
-        novaDiv.append(SelEscrita).append('Escrita');
+        leEscreveDiv.append(SelLeitura).append('Leitura');
+        leEscreveDiv.append(SelEscrita).append('Escrita');
+        novaDiv.append(leEscreveDiv);
+        //***********************************************************************
 
 
+        //***********************************************************************
+        // Cria o campo input para definir o endereço de leitura ou escrita no PLC
+        var enderecoLabel = document.createElement("label").textContent = "Endereço";
+        var endereco = $('<input type="text" name="enderecoDiv' + DivCount + '">');
+
+        //Adicionando Div e valores para Endereço do PLC
+        enderecoDiv.append(enderecoLabel);
+        enderecoDiv.append(endereco);
+        novaDiv.append(enderecoDiv);
+        //***********************************************************************
 
 
+        //***********************************************************************
+        // Coleta o valor selecionado no campo de Tipo de Dados
+        
+        if (tipoDadosHtml == 'Bool') {
 
-        /*
+            // Monta Popup na tela para Escrita de dados do tipo Bool, ou outros
+            var SelValTrue = $('<input>').attr({
+                type: 'radio',
+                name: 'valorPlcDiv' + DivCount,
+                value: 'true',
+                class: 'RadioBtnValPlc'
+            });
+            var SelValFalse = $('<input>').attr({
+                type: 'radio',
+                name: 'valorPlcDiv' + DivCount,
+                value: 'false',
+                class: 'RadioBtnValPlc'
+            });
+            valorPlcDiv.append(SelValTrue).append('True');
+            valorPlcDiv.append(SelValFalse).append('False');
+            novaDiv.append(valorPlcDiv);
+        //***********************************************************************
+
+        } else if (tipoDadosHtml == 'Real' | tipoDadosHtml == 'Int') {
 
 
-        // Cria o campo select
-        var select = $('<select name="selectDiv' + DivCount + '">');
-        // Adicione as opções desejadas ao select
-        select.append($('<option value="opcao1">Opção 1</option>'));
-        select.append($('<option value="opcao2">Opção 2</option>'));
+            //***********************************************************************
+            // Cria o campo input com valor a ser enviado ou lido do PLC
+            var valorPlcLabel = document.createElement("label").textContent = "Valor";
+            var valorPlc = $('<input id="valorPlc' + DivCount + '" type="text" name="valorPlcDiv' + DivCount + '">');
 
-        */
+            //Adicionando Div e valores para Endereço do PLC
+            valorPlcDiv.append(valorPlcLabel);
+            valorPlcDiv.append(valorPlc);
+            novaDiv.append(valorPlcDiv);
+        //***********************************************************************
+
+        };
+        //***********************************************************************
 
 
-
-
-        // Cria o campo input
-        var endereco = $('<input type="text" name="endereceoDiv' + DivCount + '">');
-
+        //***********************************************************************
         // Cria o botão de envio
         var btnEnviar = $('<button class="btnEnviarDiv" data-divindex="' + DivCount + '">Enviar</button>');
 
-        // Adiciona os campos à div
-        //novaDiv.append(select);
-        novaDiv.append(endereco);
         novaDiv.append(btnEnviar);
+        //***********************************************************************
 
         // Adiciona a div ao container
         $('#divContainer').append(novaDiv);
@@ -62,12 +112,16 @@
 
         // Recupera os valores dos campos da div específica
         var valAcao = $('input[name=SelAcao_' + divIndex + ']:checked').val();
-        var valEndereco = $('input[name="endereceoDiv' + divIndex + '"]').val();
+        var valEndereco = $('input[name="enderecoDiv' + divIndex + '"]').val();
+        var valPlc = $('input[name="valorPlcDiv' + divIndex + '"]').val();
+        var tipoDadosPlc = $('input[name="tipoDados' + divIndex + '"]').val();
 
         // Cria o objeto com os dados da div
         var dadosDiv = {
             //ValorSelect: valAcao,
-            ValorInput: valEndereco
+            Endereco: valEndereco,
+            ValorPlc: valPlc,
+            TipoDados: tipoDadosPlc
         };
 
 
@@ -75,7 +129,7 @@
 
             // Envia os dados para o backend usando uma requisição AJAX
             $.ajax({
-                url: '/ReadWrite/WritePLC', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
+                url: '/ReadWrite/WritePLC',
                 type: 'POST',
                 data: dadosDiv,
                 dataType: 'json',
@@ -93,13 +147,12 @@
 
             // Recebe os dados para o backend usando uma requisição AJAX
             $.ajax({
-                url: '/ReadWrite/ReadPLC', // Substitua "Controller" pelo nome real do seu controlador e "Action" pela ação que receberá os dados
+                url: '/ReadWrite/ReadPLC',
                 type: 'GET',
                 data: dadosDiv,
                 dataType: 'json',
-                success: function (response) {
-                    // Lida com a resposta do backend
-                    console.log(response);
+                success: function (resLeitura) {
+                    document.getElementById(idValorPlc).value = resLeitura.value;
                 },
                 error: function (error) {
                     // Lida com erros de requisição

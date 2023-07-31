@@ -75,3 +75,5 @@ C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microso
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
 C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\libman.json
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Microsoft.AspNet.SessionState.SessionStateModule.dll
+C:\Users\Fabio\Documents\GitHub\Siemens.NET\Siemens.NET\bin\Debug\net7.0\Newtonsoft.Json.dll

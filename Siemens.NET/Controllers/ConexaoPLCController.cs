@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
 using S7.Net;
+using Siemens.NET.Interfaces;
 using Siemens.NET.Models;
 
 namespace Siemens.NET.Controllers
@@ -22,41 +25,22 @@ namespace Siemens.NET.Controllers
         [HttpPost]
         public IActionResult Conectar(ConexaoPLCModel conexaoPlc)
         {
+            string valConexao = JsonConvert.SerializeObject(conexaoPlc);
+            HttpContext.Session.SetString("sessaoConexaoPlc", valConexao);
 
-            Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
+            string stsConexao = DadosConexaoPlc(conexaoPlc, "conectar");
 
-            try
-            {
-                plc.Open();
-
-                if (plc.IsConnected)
-                {
-                    ViewBag.StatusConexao = "Conectado com Sucesso!";
-                }
-            }
-            catch (PlcException ex)
-            {
-                ViewBag.StatusConexao = "Falha na Conexão";
-            }
-
+            ViewBag.StatusConexao = stsConexao;
 
             return View("Index");
 
-            /*
-            var res1 = plc.Read("DB1.DBW0");
-            ushort res2 = (ushort)plc.Read("DB1.DBW2");
-            float valRes2 = res2 / 100f;
-
-            plc.Write("DB1.DBW0", (UInt16)52);
-            plc.Write("DB1.DBD6", (float)19.33f);
-
-            */
         }
 
         [HttpPost]
-        public IActionResult Desconectar(ConexaoPLCModel conexaoModel)
+        public IActionResult Desconectar(ConexaoPLCModel conexaoPlc)
         {
-            Plc plc = new Plc(conexaoModel.TipoCPU, conexaoModel.Ip, conexaoModel.Rack, conexaoModel.Slot);
+
+            Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
 
             plc.Close();
 
@@ -69,10 +53,62 @@ namespace Siemens.NET.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult WritePLC(ReadWriteModel dados)
+        {
+            
+            return Json(new { success = true, message = "Dados recebidos com sucesso!" });
+        }
+
+        [HttpGet]
+        public ActionResult ReadPLC(ReadWriteModel dados)
+        {
+
+            return Json(new { success = true, message = "Dados recebidos com sucesso!" });
+        }
+
         // ---------------------------------------------------------------
         // Métodos Auxiliares
         // ---------------------------------------------------------------
-        
+        public string DadosConexaoPlc(ConexaoPLCModel conexaoModel, string acao)
+        {
+            string stsConexao = "";
+            Plc plc = new Plc(conexaoModel.TipoCPU, conexaoModel.Ip, conexaoModel.Rack, conexaoModel.Slot);
+
+            if (acao == "conectar")
+            {
+                try
+                {
+                    plc.Open();
+
+                    if (plc.IsConnected)
+                    {
+                        stsConexao = "Conectado com Sucesso!";
+                    }
+                }
+                catch (PlcException ex)
+                {
+                    stsConexao = "Falha na Conexão";
+                }
+            }
+            else if (acao == "desconectar")
+            {
+                plc.Close();
+
+                if (!plc.IsConnected)
+                {
+                    stsConexao = "Desconectado";
+                }
+                else
+                {
+                    stsConexao = "Falha ao Desconectar";
+                }
+ 
+            }
+
+            return stsConexao;
+
+        }
 
     }
 }

@@ -17,6 +17,5 @@ namespace Siemens.NET.Models
         [Required]
         public Int16 Slot { get; set; }
 
-
     }
 }

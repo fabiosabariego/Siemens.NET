@@ -7,11 +7,9 @@ namespace Siemens.NET.Models
     {
 
         // Leitura e Escrita de Bytes
-        public DataType DataType { get; set; }
-        public int endereco { get; set; }
-        public int StartByte { get; set; }
-        public int Count { get; set; }
-        public byte[] Value { get; set; }
+        public string? Endereco { get; set; }
+        public string ValorPlc { get; set; }
+        public string TipoDados { get; set; }
 
     }
 }
