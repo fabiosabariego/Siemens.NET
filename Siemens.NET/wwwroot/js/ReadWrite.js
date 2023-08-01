@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     var DivCount = 0;
+    var tipoDadoSelecionado;
 
     $('#btnAdicionarDiv').click(function () {
         DivCount++;
@@ -12,15 +13,53 @@
 
         //***********************************************************************
         // Recebe dados vindo da Seleção do tipo de dados do HTML
-        var tipoDadosHtml = document.getElementById('selTipoDados').value;
-        var tipoDados = $('<input type="text" name="tipoDados' + DivCount + '">');
+        //var tipoDadosName = 'tipoDadosDiv' + DivCount;
+        //var tipoDados = $('#selTipoDados').attr("name", tipoDadosName).val();
+
+        //var tipoDados = document.getElementById('selTipoDados');
+        //tipoDados.name = 'tipoDadosDiv' + DivCount;
         //***********************************************************************
+
 
         //***********************************************************************
         // Carrega texto para o Popup
-        var txtPopup = document.createElement("p").textContent = 'Dados Tipo - ' + tipoDadosHtml;
+        var txtPopup = $('<p>', {
+            text: 'Dados Tipo - ' //+ tipoDados
+        });
+
         novaDiv.append(txtPopup);
         //***********************************************************************
+
+
+        //***********************************************************************
+        // Seleciona qual tipo de dado será enviado ao PLC
+        var selTipoDados = $('<select>', {
+            class: 'selectTipoDados',
+            name: 'tipoDadosDiv' + DivCount,
+            id: 'selTipoDados'
+        });
+
+        // Criação das opções e adição ao elemento <select>
+        var selReal = $('<option>', {
+            value: 'real',
+            text: 'Real'
+        });
+        var selInt = $('<option>', {
+            value: 'int',
+            text: 'Int'
+        });
+        var selBool = $('<option>', {
+            value: 'bool',
+            text: 'Bool'
+        });
+
+        selTipoDados.append(selReal);
+        selTipoDados.append(selInt);
+        selTipoDados.append(selBool);
+
+        novaDiv.append(selTipoDados);
+        //***********************************************************************
+
 
         //***********************************************************************
         // Adicionar o campo de Seleção de Leitura ou Escrita para o PLC
@@ -57,7 +96,9 @@
         //***********************************************************************
         // Coleta o valor selecionado no campo de Tipo de Dados
         
-        if (tipoDadosHtml == 'Bool') {
+        if (tipoDadoSelecionado == 'Bool') {
+
+            var valorPlcLabel = document.createElement("label").textContent = "Valor";
 
             // Monta Popup na tela para Escrita de dados do tipo Bool, ou outros
             var SelValTrue = $('<input>').attr({
@@ -72,12 +113,14 @@
                 value: 'false',
                 class: 'RadioBtnValPlc'
             });
+
+            valorPlcDiv.append(valorPlcLabel);
             valorPlcDiv.append(SelValTrue).append('True');
             valorPlcDiv.append(SelValFalse).append('False');
             novaDiv.append(valorPlcDiv);
         //***********************************************************************
 
-        } else if (tipoDadosHtml == 'Real' | tipoDadosHtml == 'Int') {
+        } else if (tipoDadoSelecionado == 'Real' | tipoDadoSelecionado == 'Int') {
 
 
             //***********************************************************************
@@ -106,6 +149,14 @@
         $('#divContainer').append(novaDiv);
     });
 
+
+    
+    $(document).on('select[name="tipoDadosDiv' + DivCount + '"]').change(function () {
+        tipoDadoSelecionado = $(this).val();
+    });
+
+    
+
     // Manipula o evento de clique no botão de envio
     $(document).on('click', '.btnEnviarDiv', function () {
         var divIndex = $(this).data('divindex');
@@ -114,11 +165,10 @@
         var valAcao = $('input[name=SelAcao_' + divIndex + ']:checked').val();
         var valEndereco = $('input[name="enderecoDiv' + divIndex + '"]').val();
         var valPlc = $('input[name="valorPlcDiv' + divIndex + '"]').val();
-        var tipoDadosPlc = $('input[name="tipoDados' + divIndex + '"]').val();
+        var tipoDadosPlc = $('select[name="tipoDadosDiv' + divIndex + '"]').val();
 
         // Cria o objeto com os dados da div
         var dadosDiv = {
-            //ValorSelect: valAcao,
             Endereco: valEndereco,
             ValorPlc: valPlc,
             TipoDados: tipoDadosPlc
