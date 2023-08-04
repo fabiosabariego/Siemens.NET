@@ -170,12 +170,15 @@
         var valAcao = $('input[name=SelAcao_' + divIndex + ']:checked').val();
         var valEndereco = $('input[name="enderecoDiv' + divIndex + '"]').val();
         var tipoDadosPlc = $('select[name="tipoDadosDiv' + divIndex + '"]').val();
+        var idValPlc;
 
         if (tipoDadosPlc == 'bool') {
             var valPlc = $('input[name="valorBoolDiv' + divIndex + '"]').val();
+            idValPlc = "valorPlc" + divIndex;
         }
         else if (tipoDadosPlc == 'int' | tipoDadosPlc == 'real') {
             var valPlc = $('input[name="valorIntRealDiv' + divIndex + '"]').val();
+            idValPlc = "valorPlc" + divIndex;
         }
 
         // Cria o objeto com os dados da div
@@ -196,7 +199,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Lida com a resposta do backend
-                    console.log(response);
+                    alert(response.message);
                 },
                 error: function (error) {
                     // Lida com erros de requisição
@@ -212,8 +215,8 @@
                 type: 'GET',
                 data: dadosDiv,
                 dataType: 'json',
-                success: function (resLeitura) {
-                    document.getElementById(idValorPlc).value = resLeitura.value;
+                success: function (response) {
+                    document.getElementById(idValPlc).value = response.value;
                 },
                 error: function (error) {
                     // Lida com erros de requisição

@@ -21,9 +21,27 @@ namespace Siemens.NET.Controllers
             Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
             plc.Open();
 
-            plc.Write(dados.Endereco, Convert.ToInt16(dados.ValorPlc));
 
-            return Json(new { success = true, message = "Dados recebidos com sucesso!" });
+            if (dados.TipoDados == "real")
+            {
+                if (dados.ValorPlc.Contains(","))
+                {
+                    dados.ValorPlc = dados.ValorPlc.Replace(",", ".");
+                }
+
+                //plc.Write(dados.Endereco, (float)Convert.ToInt32((dados.ValorPlc) + "f"));
+                plc.Write(dados.Endereco, float.Parse(dados.ValorPlc));
+            }
+            else if (dados.TipoDados == "int")
+            {
+                plc.Write(dados.Endereco, (UInt16)Convert.ToInt16(dados.ValorPlc));
+            }
+            else if (dados.TipoDados == "bool")
+            {
+                plc.Write(dados.Endereco, dados.ValorPlc);
+            }
+
+            return Json(new { success = true, message = "Dados enviados com sucesso!" });
         }
 
         [HttpGet]
