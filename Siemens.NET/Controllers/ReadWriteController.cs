@@ -21,7 +21,7 @@ namespace Siemens.NET.Controllers
             Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
             plc.Open();
 
-
+            // Verifica qual tipo de dado foi selecionado para Escrever no PLC
             if (dados.TipoDados == "real")
             {
                 if (dados.ValorPlc.Contains(","))
@@ -54,16 +54,14 @@ namespace Siemens.NET.Controllers
             Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
             plc.Open();
 
-            dados.ValorPlc = Convert.ToString(plc.Read(dados.Endereco));
-
-            //string valResultado = JsonConvert.SerializeObject(dados);
-
-            //RETORNAR O VALOR PARA O FRONT
-
-            //return View(dados);
+            // Verifica qual tipo de dado foi selecionado para Ler no PLC
+            if (dados.TipoDados == "real")
+            {
+                dados.ValorPlc = Convert.ToString((ushort)plc.Read(dados.Endereco)/100f);
+            }
 
             return new JsonResult(Ok(dados.ValorPlc));
-
+        
         }
     }
 }
