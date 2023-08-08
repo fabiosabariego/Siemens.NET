@@ -145,16 +145,17 @@
     $(document).on("change", "#selTipoDados", function () {
 
         var dadoSelecionado = $('select[name="tipoDadosDiv' + DivCount + '"]').val();   // Coleta o dado vindo do Popup, se é Int, Real ou Bool
+        var SelAcao = $('input[name=SelAcao_' + DivCount + ']:checked').val();  // Coleta o dado vindo da popu, se será escrita ou leitura
 
         // Tira visibilidade dos campos toda vez que entrar nesta condição
         $('div[id="selBool' + DivCount + '"]').hide();
         $('div[id="selIntReal' + DivCount + '"]').hide();
 
         // Condição para mostrar na tela se os campos serão para dados tipo Bool, ou Int / Real
-        if (dadoSelecionado == 'bool') {
+        if (dadoSelecionado == 'bool' && SelAcao == 'escrita') {
             $('div[id="selBool' + DivCount + '"]').show();
         }
-        else if (dadoSelecionado == 'int' | dadoSelecionado == 'real') {
+        else {
             $('div[id="selIntReal' + DivCount + '"]').show();
         }
     });
@@ -173,7 +174,7 @@
         var idValPlc;
 
         if (tipoDadosPlc == 'bool') {
-            var valPlc = $('input[name="valorBoolDiv' + divIndex + '"]').val();
+            var valPlc = $('input[name="valorBoolDiv' + divIndex + '"]:checked').val();
             idValPlc = "valorPlc" + divIndex;
         }
         else if (tipoDadosPlc == 'int' | tipoDadosPlc == 'real') {

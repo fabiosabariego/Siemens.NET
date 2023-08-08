@@ -38,7 +38,7 @@ namespace Siemens.NET.Controllers
             }
             else if (dados.TipoDados == "bool")
             {
-                plc.Write(dados.Endereco, dados.ValorPlc);
+                plc.Write(dados.Endereco, Convert.ToBoolean(dados.ValorPlc));
             }
 
             return Json(new { success = true, message = "Dados enviados com sucesso!" });
@@ -57,8 +57,17 @@ namespace Siemens.NET.Controllers
             // Verifica qual tipo de dado foi selecionado para Ler no PLC
             if (dados.TipoDados == "real")
             {
-                dados.ValorPlc = Convert.ToString((ushort)plc.Read(dados.Endereco)/100f);
+                dados.ValorPlc = Convert.ToString(BitConverter.UInt32BitsToSingle((UInt32)plc.Read(dados.Endereco)));
             }
+            else if (dados.TipoDados == "int")
+            {
+                dados.ValorPlc = Convert.ToString(plc.Read(dados.Endereco));
+            }
+            else if (dados.TipoDados == "bool")
+            {
+                dados.ValorPlc = Convert.ToString(plc.Read(dados.Endereco));
+            }
+
 
             return new JsonResult(Ok(dados.ValorPlc));
         
