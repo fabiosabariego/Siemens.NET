@@ -8,6 +8,8 @@ namespace Siemens.NET.Models
     {
 
         // Leitura e Escrita de Bytes
+        [Required]
+        public string? EnderecoDB { get; set; }
 
         [Required]
         public string? Endereco { get; set; }

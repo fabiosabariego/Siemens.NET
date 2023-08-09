@@ -10,7 +10,7 @@
         // Cria a div dinamicamente
         var novaDiv = $('<div class="minhaDiv">');
         var leEscreveDiv = $('<div class="leEscreveDiv">');
-        var enderecoDiv = $('<div class="enderecoDiv">');
+        var enderecoDiv = $('<div class="enderecoDiv" id="enderecoId' + DivCount + '">');
         var valIntRealDiv = $('<div class"selIntRealDiv" id="selIntReal' + DivCount + '">');
         var valBoolDiv = $('<div class"selBoolDiv" id="selBool' + DivCount + '">');
 
@@ -72,11 +72,21 @@
         //***********************************************************************
         // Cria o campo input para definir o endereço de leitura ou escrita no PLC
         var enderecoLabel = document.createElement("label").textContent = "Endereço";
+        enderecoDiv.append(enderecoLabel);
+
+        // Cria Campo para inserir a DB
+        var enderecoDB = $('<input type="text" name="enderecoDBDiv' + DivCount + '">');
+
+        // Cria segundo campo do endereço apra inserir se será DBW, DBD ou DBX
+        var enderecoTxt = $('<p name="enderecoTxtDiv' + DivCount + '">');
         var endereco = $('<input type="text" name="enderecoDiv' + DivCount + '">');
 
+        // Insere um valor inicial para que o campo não fique vazio e confunda o operador
+        $(enderecoTxt).text("DB_");
+
         //Adicionando Div e valores para Endereço do PLC
-        enderecoDiv.append(enderecoLabel);
-        enderecoDiv.append(endereco);
+        enderecoDiv.append('DB').append(enderecoDB);
+        enderecoDiv.append(enderecoTxt).append(endereco);
         novaDiv.append(enderecoDiv);
         //***********************************************************************
 
@@ -146,17 +156,31 @@
 
         var dadoSelecionado = $('select[name="tipoDadosDiv' + DivCount + '"]').val();   // Coleta o dado vindo do Popup, se é Int, Real ou Bool
         var SelAcao = $('input[name=SelAcao_' + DivCount + ']:checked').val();  // Coleta o dado vindo da popu, se será escrita ou leitura
+        var endText = $('p[name="enderecoTxtDiv' + DivCount + '"]');
+
+       // var txtEndereco = $('p[name="enderecoTxtDiv' + DivCount + '"]').val();  // Envia para a popup o texto referente ao endereço selecionado
 
         // Tira visibilidade dos campos toda vez que entrar nesta condição
         $('div[id="selBool' + DivCount + '"]').hide();
         $('div[id="selIntReal' + DivCount + '"]').hide();
 
         // Condição para mostrar na tela se os campos serão para dados tipo Bool, ou Int / Real
-        if (dadoSelecionado == 'bool' && SelAcao == 'escrita') {
-            $('div[id="selBool' + DivCount + '"]').show();
+        if (dadoSelecionado == 'bool') {
+            $(endText).text("DBX");
+
+            if (SelAcao == 'escrita') {
+                $('div[id="selBool' + DivCount + '"]').show();
+            }
         }
         else {
             $('div[id="selIntReal' + DivCount + '"]').show();
+
+            if (dadoSelecionado == 'real') {
+                $(endText).text("DBD");
+            }
+            else {
+                $(endText).text("DBW");
+            }
         }
     });
     //===========================================================================
@@ -169,6 +193,7 @@
 
         // Recupera os valores dos campos da div específica
         var valAcao = $('input[name=SelAcao_' + divIndex + ']:checked').val();
+        var valEnderecoDB = $('input[name="enderecoDBDiv' + divIndex + '"]').val();
         var valEndereco = $('input[name="enderecoDiv' + divIndex + '"]').val();
         var tipoDadosPlc = $('select[name="tipoDadosDiv' + divIndex + '"]').val();
         var idValPlc;
@@ -184,6 +209,7 @@
 
         // Cria o objeto com os dados da div
         var dadosDiv = {
+            EnderecoDB: valEnderecoDB,
             Endereco: valEndereco,
             ValorPlc: valPlc,
             TipoDados: tipoDadosPlc

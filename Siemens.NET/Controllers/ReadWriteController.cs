@@ -21,6 +21,8 @@ namespace Siemens.NET.Controllers
             Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
             plc.Open();
 
+            string endereco = EnderecoPLC(dados);
+
             // Verifica qual tipo de dado foi selecionado para Escrever no PLC
             if (dados.TipoDados == "real")
             {
@@ -30,15 +32,15 @@ namespace Siemens.NET.Controllers
                 }
 
                 //plc.Write(dados.Endereco, (float)Convert.ToInt32((dados.ValorPlc) + "f"));
-                plc.Write(dados.Endereco, float.Parse(dados.ValorPlc));
+                plc.Write(endereco, float.Parse(dados.ValorPlc));
             }
             else if (dados.TipoDados == "int")
             {
-                plc.Write(dados.Endereco, (UInt16)Convert.ToInt16(dados.ValorPlc));
+                plc.Write(endereco, (UInt16)Convert.ToInt16(dados.ValorPlc));
             }
             else if (dados.TipoDados == "bool")
             {
-                plc.Write(dados.Endereco, Convert.ToBoolean(dados.ValorPlc));
+                plc.Write(endereco, Convert.ToBoolean(dados.ValorPlc));
             }
 
             return Json(new { success = true, message = "Dados enviados com sucesso!" });
@@ -54,24 +56,49 @@ namespace Siemens.NET.Controllers
             Plc plc = new Plc(conexaoPlc.TipoCPU, conexaoPlc.Ip, conexaoPlc.Rack, conexaoPlc.Slot);
             plc.Open();
 
+            string endereco = EnderecoPLC(dados);
+
             // Verifica qual tipo de dado foi selecionado para Ler no PLC
             if (dados.TipoDados == "real")
             {
-                dados.ValorPlc = Convert.ToString(BitConverter.UInt32BitsToSingle((UInt32)plc.Read(dados.Endereco)));
+                dados.ValorPlc = Convert.ToString(BitConverter.UInt32BitsToSingle((UInt32)plc.Read(endereco)));
             }
             else if (dados.TipoDados == "int")
             {
-                dados.ValorPlc = Convert.ToString(plc.Read(dados.Endereco));
+                dados.ValorPlc = Convert.ToString(plc.Read(endereco));
             }
             else if (dados.TipoDados == "bool")
             {
-                dados.ValorPlc = Convert.ToString(plc.Read(dados.Endereco));
+                dados.ValorPlc = Convert.ToString(plc.Read(endereco));
             }
 
 
             return new JsonResult(Ok(dados.ValorPlc));
         
         }
+
+
+        // Metodos Adicionais para Leitura e Escrita
+        private string EnderecoPLC(ReadWriteModel dados)
+        {
+            string tipoEndereco = "";
+
+            if (dados.TipoDados == "bool")
+            {
+                tipoEndereco = "X";
+            }
+            else if (dados.TipoDados == "int")
+            {
+                tipoEndereco = "W";
+            }
+            else
+            {
+                tipoEndereco = "D";
+            }
+
+            return $"DB{dados.EnderecoDB}.DB{tipoEndereco}{dados.Endereco}";
+        }
+
     }
 }
 
