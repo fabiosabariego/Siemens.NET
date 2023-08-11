@@ -9,28 +9,34 @@
 
         // Cria a div dinamicamente
         var novaDiv = $('<div class="minhaDiv">');
-        var leEscreveDiv = $('<div class="leEscreveDiv">');
-        var enderecoDiv = $('<div class="enderecoDiv" id="enderecoId' + DivCount + '">');
         var valIntRealDiv = $('<div class"selIntRealDiv" id="selIntReal' + DivCount + '">');
         var valBoolDiv = $('<div class"selBoolDiv" id="selBool' + DivCount + '">');
 
 
         //***********************************************************************
+        //Criando DIVs para campo de leitura e escrita
+        var leituraDiv = $('<div class="leituraDiv">');
+        var escritaDiv = $('<div class="escritaDiv">');
+        var leEscreveDiv = $('<div class="leEscreveDiv">');
+
         // Adicionar o campo de Seleção de Leitura ou Escrita para o PLC
         var SelLeitura = $('<input>').attr({
             type: 'radio',
             name: 'SelAcao_' + DivCount,
             value: 'leitura',
-            class: 'RadioBtnAcao'
+            class: 'RadioBtnAcao',
+            id: 'idLeitura'
         });
         var SelEscrita = $('<input>').attr({
             type: 'radio',
             name: 'SelAcao_' + DivCount,
             value: 'escrita',
-            class: 'RadioBtnAcao'
+            class: 'RadioBtnAcao',
+            id: 'idEscrita'
         });
-        leEscreveDiv.append(SelLeitura).append('Leitura');
-        leEscreveDiv.append(SelEscrita).append('Escrita');
+        leituraDiv.append(SelLeitura).append('Leitura');
+        escritaDiv.append(SelEscrita).append('Escrita');
+        leEscreveDiv.append(leituraDiv).append(escritaDiv);
         novaDiv.append(leEscreveDiv);
         //***********************************************************************
 
@@ -38,7 +44,7 @@
         //***********************************************************************
         // Seleciona qual tipo de dado será enviado ao PLC
         var selTipoDados = $('<select>', {
-            class: 'selectTipoDados',
+            class: 'selectTipoDados form-select form-select-md mb-1',
             name: 'tipoDadosDiv' + DivCount,
             id: 'selTipoDados'
         });
@@ -70,30 +76,34 @@
 
 
         //***********************************************************************
+        // Criando DIVs para Endereços
+        var enderecoDivDB = $('<div class="endDivDB input-group mb-1" id="endDivDBId' + DivCount + '">');
+        var enderecoDivValue = $('<div class="endDivVal input-group mb-2" id="endDivValId' + DivCount + '">');
+
         // Cria o campo input para definir o endereço de leitura ou escrita no PLC
-        var enderecoLabel = document.createElement("label").textContent = "Endereço";
-        enderecoDiv.append(enderecoLabel);
+        var enderecoLabel = $('<label class="enderecoLabel">Endereço</label>');
+        novaDiv.append(enderecoLabel);
 
         // Cria Campo para inserir a DB
-        var enderecoDB = $('<input type="text" name="enderecoDBDiv' + DivCount + '">');
+        var labelEnderecoDB = $('<span class="input-group-text" id="basic-addon1">DB</span>');
+        var enderecoDB = $('<input type="text" name="enderecoDBDiv' + DivCount + '" class="form-control" placeholder="Valor DB" aria-label="Valor DB" aria-describedby="basic-addon1">');
 
         // Cria segundo campo do endereço apra inserir se será DBW, DBD ou DBX
-        var enderecoTxt = $('<p name="enderecoTxtDiv' + DivCount + '">');
-        var endereco = $('<input type="text" name="enderecoDiv' + DivCount + '">');
-
-        // Insere um valor inicial para que o campo não fique vazio e confunda o operador
-        $(enderecoTxt).text("DB_");
+        var enderecoTxt = $('<span name="enderecoTxtDiv' + DivCount + '" class="input-group-text" id="basic-addon1">DB_</span>');
+        var endereco = $('<input type="text" name="enderecoDiv' + DivCount + '" class="form-control" placeholder="Endereço DB" aria-label="Endereço DB" aria-describedby="basic-addon1">');
 
         //Adicionando Div e valores para Endereço do PLC
-        enderecoDiv.append('DB').append(enderecoDB);
-        enderecoDiv.append(enderecoTxt).append(endereco);
-        novaDiv.append(enderecoDiv);
+        enderecoDivDB.append(labelEnderecoDB).append(enderecoDB);
+        enderecoDivValue.append(enderecoTxt).append(endereco);
+        novaDiv.append(enderecoDivDB);
+        novaDiv.append(enderecoDivValue);
         //***********************************************************************
 
 
         //***********************************************************************
         // Adiciona na popup o campo para acionamento quando dado for Bool
         var valorBoolLabel = document.createElement("label").textContent = "Valor";
+        valBoolDiv.append(valorBoolLabel);
 
         // Monta Popup na tela para Escrita de dados do tipo Bool, ou outros
         var SelValTrue = $('<input>').attr({
@@ -111,7 +121,6 @@
 
 
         //Adicionando Div e valores para Endereço do PLC
-        valBoolDiv.append(valorBoolLabel);
         valBoolDiv.append(SelValTrue).append('True');
         valBoolDiv.append(SelValFalse).append('False');
         novaDiv.append(valBoolDiv);
@@ -156,7 +165,7 @@
 
         var dadoSelecionado = $('select[name="tipoDadosDiv' + DivCount + '"]').val();   // Coleta o dado vindo do Popup, se é Int, Real ou Bool
         var SelAcao = $('input[name=SelAcao_' + DivCount + ']:checked').val();  // Coleta o dado vindo da popu, se será escrita ou leitura
-        var endText = $('p[name="enderecoTxtDiv' + DivCount + '"]');
+        var endText = $('span[name="enderecoTxtDiv' + DivCount + '"]');
 
        // var txtEndereco = $('p[name="enderecoTxtDiv' + DivCount + '"]').val();  // Envia para a popup o texto referente ao endereço selecionado
 
@@ -172,7 +181,7 @@
                 $('div[id="selBool' + DivCount + '"]').show();
             }
         }
-        else {
+        else if (dadoSelecionado == 'real' | dadoSelecionado == 'int') {
             $('div[id="selIntReal' + DivCount + '"]').show();
 
             if (dadoSelecionado == 'real') {
@@ -181,6 +190,10 @@
             else {
                 $(endText).text("DBW");
             }
+        }
+        else if (dadoSelecionado == 'tipo') {
+            $('div[id="selBool' + DivCount + '"]').hide();
+            $('div[id="selIntReal' + DivCount + '"]').hide();
         }
     });
     //===========================================================================
