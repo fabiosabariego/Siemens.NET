@@ -9,8 +9,6 @@
 
         // Cria a div dinamicamente
         var novaDiv = $('<div class="minhaDiv">');
-        var valIntRealDiv = $('<div class"selIntRealDiv" id="selIntReal' + DivCount + '">');
-        var valBoolDiv = $('<div class"selBoolDiv" id="selBool' + DivCount + '">');
 
 
         //***********************************************************************
@@ -101,9 +99,15 @@
 
 
         //***********************************************************************
+        // Adiciona DIVs de True ou False
+        var valBoolDiv = $('<div class="valBoolDiv" id="selBool' + DivCount + '">');
+        var boolLabelDiv = $('<div class="boolLabelDiv" id="boolLabel' + DivCount + '">');
+        var trueDiv = $('<div class="trueDiv">');
+        var falseDiv = $('<div class="falseDiv">');
+
         // Adiciona na popup o campo para acionamento quando dado for Bool
         var valorBoolLabel = document.createElement("label").textContent = "Valor";
-        valBoolDiv.append(valorBoolLabel);
+        boolLabelDiv.append(valorBoolLabel);
 
         // Monta Popup na tela para Escrita de dados do tipo Bool, ou outros
         var SelValTrue = $('<input>').attr({
@@ -121,19 +125,24 @@
 
 
         //Adicionando Div e valores para Endereço do PLC
-        valBoolDiv.append(SelValTrue).append('True');
-        valBoolDiv.append(SelValFalse).append('False');
-        novaDiv.append(valBoolDiv);
+        trueDiv.append(SelValTrue).append('True');
+        falseDiv.append(SelValFalse).append('False');
+        valBoolDiv.append(trueDiv).append(falseDiv);
+        novaDiv.append(boolLabelDiv).append(valBoolDiv);
 
         // Esconde o campo ao cirar a Popup
         $(valBoolDiv).hide();
+        $(boolLabelDiv).hide();
         //***********************************************************************
 
 
         //***********************************************************************
+        //Adicionando DIVs
+        var valIntRealDiv = $('<div class"selIntRealDiv" id="selIntReal' + DivCount + '">');
+
         // Adiciona na popup o campo para acionamento quando dado for Int ou Real
         var valorIntRealLabel = document.createElement("label").textContent = "Valor";
-        var valorIntReal = $('<input id="valorPlc' + DivCount + '" type="text" name="valorIntRealDiv' + DivCount + '">');
+        var valorIntReal = $('<input type="text" name="valorIntRealDiv' + DivCount + '" class="form-control mb-2" placeholder="Valor PLC" aria-label="Valor PLC" aria-describedby="basic-addon1" id="valorPlc' + DivCount + '">');
 
         //Adicionando Div e valores para Endereço do PLC
         valIntRealDiv.append(valorIntRealLabel);
@@ -147,7 +156,7 @@
 
         //***********************************************************************
         // Cria o botão de envio
-        var btnEnviar = $('<button class="btnEnviarDiv" data-divindex="' + DivCount + '">Enviar</button>');
+        var btnEnviar = $('<button class="btnEnviarDiv btn btn-primary" data-divindex="' + DivCount + '">Enviar</button>');
 
         novaDiv.append(btnEnviar);
         //***********************************************************************
@@ -167,11 +176,11 @@
         var SelAcao = $('input[name=SelAcao_' + DivCount + ']:checked').val();  // Coleta o dado vindo da popu, se será escrita ou leitura
         var endText = $('span[name="enderecoTxtDiv' + DivCount + '"]');
 
-       // var txtEndereco = $('p[name="enderecoTxtDiv' + DivCount + '"]').val();  // Envia para a popup o texto referente ao endereço selecionado
 
         // Tira visibilidade dos campos toda vez que entrar nesta condição
         $('div[id="selBool' + DivCount + '"]').hide();
         $('div[id="selIntReal' + DivCount + '"]').hide();
+        $('div[id="boolLabel' + DivCount + '"]').hide();
 
         // Condição para mostrar na tela se os campos serão para dados tipo Bool, ou Int / Real
         if (dadoSelecionado == 'bool') {
@@ -179,6 +188,10 @@
 
             if (SelAcao == 'escrita') {
                 $('div[id="selBool' + DivCount + '"]').show();
+                $('div[id="boolLabel' + DivCount + '"]').show();
+            }
+            else if (SelAcao == 'leitura') {
+                $('div[id="selIntReal' + DivCount + '"]').show();
             }
         }
         else if (dadoSelecionado == 'real' | dadoSelecionado == 'int') {

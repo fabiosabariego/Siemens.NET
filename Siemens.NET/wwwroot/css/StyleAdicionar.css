@@ -66,5 +66,36 @@
 }
 
 .enderecoLabel{
-    margin: 6px 0px 4px 0px;
+    margin: 6px 0px 2px 0px;
+}
+
+.btnEnviarDiv {
+    box-shadow: 3px 3px 3px 1px rgb(0, 0, 0, 0.5);
+    margin: 1px 0px 0px 0px;
+}
+
+.valBoolDiv {
+    font: normal 12pt Arial;
+    background-color: rgb(241, 241, 241);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0px 10px 0px;
+    border-radius: 6px;
+    width: 180px;
+    height: 36px;
+    margin: 0px 0px 10px 0px;
+}
+
+.boolLabelDiv {
+    margin: 2px 0px 2px 0px;
+}
+
+.trueDiv {
+    padding: 0px 10px 0px 0px;
+}
+
+.RadioBtnValPlc {
+    margin: 0px 2px 0px 2px;
 }
